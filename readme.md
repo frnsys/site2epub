@@ -7,8 +7,8 @@ This uses `justext` for context extraction (worked best in my tests) and uses `p
 ## Installation
 
 ```
-pip install -r requirements.txt
 apt install pandoc
+pip install -r requirements.txt
 ```
 
 ## Usage
