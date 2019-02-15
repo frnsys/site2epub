@@ -14,5 +14,5 @@ pip install -r requirements.txt
 ## Usage
 
 ```
-python site2epub.py <URL> <OUTPUT>.epub
+python site2epub.py <URL> <OUTPUT DIRECTORY>
 ```

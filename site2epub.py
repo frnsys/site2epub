@@ -1,8 +1,9 @@
+import os
 import justext
 import requests
 import subprocess
 
-def site2epub(url, outfile=None):
+def site2epub(url, outdir):
     resp = requests.get(url)
     paragraphs = justext.justext(resp.content, justext.get_stoplist('English'))
 
@@ -21,19 +22,18 @@ def site2epub(url, outfile=None):
     with open('/tmp/site2epub.html', 'w') as f:
         f.write('\n'.join(html))
 
-    outfile = outfile or '{}.epub'.format(title)
+    outfile = os.path.join(outdir, '{}.epub'.format(title))
     subprocess.run(['pandoc', '-o', outfile, '/tmp/site2epub.html'])
+    return outfile
 
 
 if __name__ == '__main__':
     import sys
     args = sys.argv[1:]
-    if len(args) < 1:
-        print('Specify the url')
+    if len(args) < 2:
+        print('Specify the url and output dir')
         sys.exit(1)
 
-    if len(args) >= 2:
-        url, outfile = args
-    else:
-        url, outfile = args[0], None
-    site2epub(url, outfile)
+    url, outdir = args
+    path = site2epub(url, outdir)
+    print(path)
