@@ -5,7 +5,7 @@ import subprocess
 def site2epub(url, outfile):
     resp = requests.get(url)
     paragraphs = justext.justext(resp.content, justext.get_stoplist('English'))
-    html = []
+    html = ['<p>Saved from: {}</p>'.format(url)]
     for paragraph in paragraphs:
         if not paragraph.is_boilerplate:
             tag = paragraph.dom_path.rsplit('.', 1)[-1]
