@@ -10,7 +10,7 @@ tmpl = '''
 <head>
     <title>{title}</title>
     <meta name="subtitle" content="{subtitle}">
-    <meta name="author" content="{author}">
+    {authors}
     <meta name="date" content="Created at {date}">
     <meta name="subject" content="{keywords}">
 </head>
@@ -39,10 +39,11 @@ def site2epub(url, outdir):
 
 
     title = article.title
+    authors = ['<meta name="author" content="{}">'.format(a) for a in article.authors]
     with open('/tmp/site2epub.html', 'w') as f:
         f.write(tmpl.format(
             title=title,
-            author='; '.join(article.authors),
+            authors='\n'.join(authors),
             subtitle='Saved from: {}'.format(url),
             keywords=', '.join(article.keywords),
             date=datetime.now(),
