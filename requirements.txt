@@ -1,2 +1,4 @@
 jusText==2.2.0
 requests==2.21.0
+newspaper3k==0.2.8
+python-slugify==2.0.1
